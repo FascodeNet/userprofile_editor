@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-
+add_subdirectory(qtaccountsservice)
 project(userprofile_editor LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -40,5 +40,5 @@ add_executable(userprofile_editor
       ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
       ${QM_FILES}
 )
-target_link_libraries(userprofile_editor PRIVATE Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2 Qt${QT_VERSION_MAJOR}::Core)
+target_link_libraries(userprofile_editor PRIVATE QtAccountsService Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2 Qt${QT_VERSION_MAJOR}::Core)
 qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
