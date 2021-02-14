@@ -1,0 +1,4 @@
+[submodule "qtaccountsservice"]
+	path = qtaccountsservice
+	url = https://github.com/kokkiemouse/qtaccountsservice.git
+	branch = develop
