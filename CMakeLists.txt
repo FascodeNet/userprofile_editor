@@ -23,24 +23,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #            ${CMAKE_CURRENT_SOURCE_DIR}/path/to/libssl.so)
 #    endif()
 #endif()
-
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
-
-if(ANDROID)
-  add_library(userprofile_editor SHARED
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Core Quick LinguistTools QuickControls2 Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools QuickControls2 Widgets REQUIRED)
+set(TS_FILES userprofile_editor_ja_JP.ts)
+set(SOURCES
     main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
-else()
-  add_executable(userprofile_editor
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-  )
-endif()
+    qml_signal_manager.cpp
+    qml_signal_manager.h)
 
-target_link_libraries(userprofile_editor PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+qt5_add_translation(QM_FILES ${TS_FILES})
+qt5_create_translation(QM_FILES ${CMAKE_CURRENT_SOURCE_DIR} ${TS_FILES})
+configure_file(translations.qrc ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+add_executable(userprofile_editor
+      ${SOURCES}
+      qml.qrc
+      ${CMAKE_CURRENT_BINARY_DIR}/translations.qrc
+      ${QM_FILES}
+)
+target_link_libraries(userprofile_editor PRIVATE Qt${QT_VERSION_MAJOR}::Quick Qt${QT_VERSION_MAJOR}::QuickControls2 Qt${QT_VERSION_MAJOR}::Core)
+qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
