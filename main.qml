@@ -61,6 +61,36 @@ ApplicationWindow {
         y: 96
         text: UserNameKun
     }
+
+    Label {
+        id: label
+        x: 254
+        y: 133
+        text: "Display Name"
+    }
+
+    TextField {
+        id: textField
+        x: 362
+        y: 126
+        placeholderText: qsTr("Display Name")
+        text:display_Name
+    }
+
+    Label {
+        id: label1
+        x: 254
+        y: 184
+        text: qsTr("Email")
+    }
+
+    TextField {
+        id: email_textField1
+        x: 362
+        y: 176
+        placeholderText: qsTr("email")
+        text:email_field
+    }
     Component.onCompleted: {
 
     }

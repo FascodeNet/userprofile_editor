@@ -38,6 +38,8 @@ int main(int argc, char *argv[])
     qml_signal_manager sigman;
     engine.rootContext()->setContextProperty("UserIconSrc",facefile_path);
     engine.rootContext()->setContextProperty("UserNameKun",current_account->userName());
+    engine.rootContext()->setContextProperty("display_Name",current_account->displayName());
+    engine.rootContext()->setContextProperty("email_field",current_account->email());
     engine.load(url);
     QObject *root = engine.rootObjects().first();
     QObject::connect(root,SIGNAL(clicked_usericon()),&sigman,SLOT(clicked_icon()));
