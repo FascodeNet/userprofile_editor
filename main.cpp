@@ -9,6 +9,9 @@
 #include <QTranslator>
 #include <QProcess>
 #include "qml_signal_manager.h"
+#include <unistd.h>
+#include <sys/types.h>
+#include "qtaccountsservice/accountsmanager.h"
 int main(int argc, char *argv[])
 {
     QQuickStyle::setStyle("Material");
@@ -19,6 +22,10 @@ int main(int argc, char *argv[])
         std::cout << lang_path.toStdString() << std::endl;
         qtTranslator.load(lang_path,"/opt/lang/userprofile_editor");
         app.installTranslator(&qtTranslator);
+    uid_t current_uid=getuid();
+    QtAccountsService::AccountsManager managerkun;
+    QtAccountsService::UserAccount *current_account=managerkun.findUserById(current_uid);
+    std::cout << current_account->userName().toStdString() << std::endl;
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
         QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -30,6 +37,7 @@ int main(int argc, char *argv[])
     std::cout << facefile_path.toStdString() << std::endl;
     qml_signal_manager sigman;
     engine.rootContext()->setContextProperty("UserIconSrc",facefile_path);
+    engine.rootContext()->setContextProperty("UserNameKun",current_account->userName());
     engine.load(url);
     QObject *root = engine.rootObjects().first();
     QObject::connect(root,SIGNAL(clicked_usericon()),&sigman,SLOT(clicked_icon()));
@@ -65,5 +73,6 @@ int main(int argc, char *argv[])
         setfacl_2nd.start("setfacl",setfacl_2nd_list);
 
     });
+
     return app.exec();
 }

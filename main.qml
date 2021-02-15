@@ -56,10 +56,10 @@ ApplicationWindow {
     }
 
     Label {
-        id: label
-        x: 57
+        id: username_label
+        x: 92
         y: 96
-        text: qsTr("Icon")
+        text: UserNameKun
     }
     Component.onCompleted: {
 

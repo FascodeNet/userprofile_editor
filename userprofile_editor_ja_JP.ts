@@ -13,10 +13,5 @@
         <source>Please select icon</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="main.qml" line="62"/>
-        <source>Icon</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>
