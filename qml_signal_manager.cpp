@@ -13,3 +13,10 @@ void qml_signal_manager::stdoutkun(QString data){
 void qml_signal_manager::do_copy_face(QString data){
     do_copy_face_sig(data);
 }
+void qml_signal_manager::reset_txt_box(){
+    reset_txt_box_sig();
+}
+
+void qml_signal_manager::clicked_savebutton(){
+    clicked_savebutton_sig();
+}

@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("UserNameKun",current_account->userName());
     engine.rootContext()->setContextProperty("display_Name",current_account->displayName());
     engine.rootContext()->setContextProperty("email_field",current_account->email());
+    engine.rootContext()->setContextProperty("realName_txt",current_account->realName());
     engine.load(url);
     QObject *root = engine.rootObjects().first();
     QObject::connect(root,SIGNAL(clicked_usericon()),&sigman,SLOT(clicked_icon()));
@@ -75,6 +76,17 @@ int main(int argc, char *argv[])
         setfacl_2nd.start("setfacl",setfacl_2nd_list);
 
     });
+    QObject::connect(root,SIGNAL(reset_txt_box_sig()),&sigman,SLOT(reset_txt_box()));
+    QObject::connect(&sigman,&qml_signal_manager::reset_txt_box_sig,[&]() {
 
+        engine.rootContext()->setContextProperty("UserNameKun",current_account->userName());
+        engine.rootContext()->setContextProperty("display_Name",current_account->displayName());
+        engine.rootContext()->setContextProperty("email_field",current_account->email());
+        engine.rootContext()->setContextProperty("realName_txt",current_account->realName());
+    });
+    QObject::connect(root,SIGNAL(clicked_savebutton()),&sigman,SLOT(clicked_savebutton()));
+    QObject::connect(&sigman,&qml_signal_manager::clicked_savebutton_sig,[&](){
+        std::cout << "clicked save" << std::endl;
+    });
     return app.exec();
 }

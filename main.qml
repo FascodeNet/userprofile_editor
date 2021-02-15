@@ -11,13 +11,18 @@ ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
     signal clicked_usericon();
+    signal clicked_savebutton();
     signal stdout_sig(string data);
     signal do_copy_face_sig(string data);
+    signal reset_txt_box_sig();
     function stdout(data){
         stdout_sig(data);
     }
     function do_copy_face(data){
         do_copy_face_sig(data);
+    }
+    function reset_txt_box(){
+        reset_txt_box_sig();
     }
 
     FileDialog{
@@ -91,8 +96,49 @@ ApplicationWindow {
         placeholderText: qsTr("email")
         text:email_field
     }
-    Component.onCompleted: {
 
+    Button {
+        id: button
+        x: 41
+        y: 428
+        text: qsTr("Reset")
+        onClicked: {
+            reset_txt_box();
+        }
+    }
+
+    Button {
+        id: button1
+        x: 261
+        y: 428
+        text: qsTr("Save")
+        onClicked: {
+            clicked_savebutton();
+        }
+    }
+
+    Button {
+        id: button2
+        x: 523
+        y: 428
+        text: qsTr("OK")
+    }
+
+    Label {
+        id: label2
+        x: 255
+        y: 228
+        text: qsTr("realName")
+    }
+
+    TextField {
+        id: textField1
+        x: 362
+        y: 220
+        placeholderText: qsTr("Text Field")
+        text: realName_txt
+    }
+    Component.onCompleted: {
     }
 
 }
