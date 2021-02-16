@@ -20,3 +20,6 @@ void qml_signal_manager::reset_txt_box(){
 void qml_signal_manager::clicked_savebutton(){
     clicked_savebutton_sig();
 }
+void qml_signal_manager::set_dispname(QString data){
+    set_dispname_sig(data);
+}

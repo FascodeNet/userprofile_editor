@@ -87,6 +87,15 @@ int main(int argc, char *argv[])
     QObject::connect(root,SIGNAL(clicked_savebutton()),&sigman,SLOT(clicked_savebutton()));
     QObject::connect(&sigman,&qml_signal_manager::clicked_savebutton_sig,[&](){
         std::cout << "clicked save" << std::endl;
+        QObject* textfield_dispname=engine.rootObjects().first()->findChild<QObject*>("textfield_dispname");
+        QString displayname= textfield_dispname->property("text").toString();
+        QObject* textfield_realname=engine.rootObjects().first()->findChild<QObject*>("textfield_realname_box");
+        QString realnem=textfield_realname->property("text").toString();
+        QObject* email_field_textfield=engine.rootObjects().first()->findChild<QObject*>("email_field");
+        QString email=email_field_textfield->property("text").toString();
+        current_account->setEmail(email);
+        current_account->setRealName(realnem);
+
     });
     return app.exec();
 }

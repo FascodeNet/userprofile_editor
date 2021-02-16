@@ -9,7 +9,7 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Fascode UserProfile Editor")
     signal clicked_usericon();
     signal clicked_savebutton();
     signal stdout_sig(string data);
@@ -23,6 +23,9 @@ ApplicationWindow {
     }
     function reset_txt_box(){
         reset_txt_box_sig();
+    }
+    function clicked_save(){
+        clicked_savebutton();
     }
 
     FileDialog{
@@ -63,7 +66,9 @@ ApplicationWindow {
     Label {
         id: username_label
         x: 92
-        y: 96
+        y: 87
+        width: 126
+        height: 33
         text: UserNameKun
     }
 
@@ -75,9 +80,12 @@ ApplicationWindow {
     }
 
     TextField {
-        id: textField
+        id: textField_displayname
+        objectName: "textfield_dispname"
         x: 362
         y: 126
+        width: 278
+        height: 40
         placeholderText: qsTr("Display Name")
         text:display_Name
     }
@@ -91,8 +99,11 @@ ApplicationWindow {
 
     TextField {
         id: email_textField1
+        objectName: "email_field"
         x: 362
-        y: 176
+        y: 172
+        width: 278
+        height: 44
         placeholderText: qsTr("email")
         text:email_field
     }
@@ -113,7 +124,7 @@ ApplicationWindow {
         y: 428
         text: qsTr("Save")
         onClicked: {
-            clicked_savebutton();
+            clicked_save();
         }
     }
 
@@ -122,6 +133,10 @@ ApplicationWindow {
         x: 523
         y: 428
         text: qsTr("OK")
+        onClicked: {
+            clicked_save();
+            mainWindow.close();
+        }
     }
 
     Label {
@@ -133,9 +148,12 @@ ApplicationWindow {
 
     TextField {
         id: textField1
+        objectName: "textfield_realname_box"
         x: 362
         y: 220
-        placeholderText: qsTr("Text Field")
+        width: 278
+        height: 46
+        placeholderText: qsTr("Real Name")
         text: realName_txt
     }
     Component.onCompleted: {
